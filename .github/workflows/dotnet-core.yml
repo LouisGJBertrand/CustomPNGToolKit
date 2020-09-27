@@ -23,12 +23,22 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Publish
+    - name: Publish Macos
       run: 
         dotnet publish -p:PublishProfile=MacOS
+    - name: Publish Windows 64
+      run: 
         dotnet publish -p:PublishProfile=Win64
+    - name: Publish Windows 32
+      run: 
         dotnet publish -p:PublishProfile=Win32
+    - name: Publish Linux 64
+      run: 
         dotnet publish -p:PublishProfile=Linux64
+    - name: Publish Linux ARM
+      run: 
         dotnet publish -p:PublishProfile=LinuxARM
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2.0.5
+    - name: Create a Release
+      uses: actions/create-release@v1.1.4
+    - name: Upload a Release Asset
+      uses: actions/upload-release-asset@v1.0.2
