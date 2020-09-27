@@ -26,11 +26,13 @@ jobs:
     - name: Publish Macos
       run: |
         dotnet publish -p:PublishProfile=MacOS
-        cd bin/Release/netcoreapp3.1/publish/MacOS | find . -name "*" -print| zip -r "CustomPNGToolKit.MACOS.zip" -@
+        cd bin/Release/netcoreapp3.1/publish/MacOS
+        find . -name "*" -print| zip -r "CustomPNGToolKit.MACOS.zip" -@
     - name: Publish Windows 64
       run:  |
         dotnet publish -p:PublishProfile=Win64
-        cd bin/Release/netcoreapp3.1/publish/Win64 | find . -name "*" -print| zip -r "CustomPNGToolKit.Win64.zip" -@
+        cd bin/Release/netcoreapp3.1/publish/Win64
+        find . -name "*" -print| zip -r "CustomPNGToolKit.Win64.zip" -@
     - name: Publish Windows 32
       run: 
         dotnet publish -p:PublishProfile=Win32
