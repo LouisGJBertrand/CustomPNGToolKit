@@ -34,17 +34,17 @@ jobs:
         cd bin/Release/netcoreapp3.1/publish/win64
         find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Win64.zip" -@
     - name: Publish Windows 32
-      run: 
+      run: |
         dotnet publish -p:PublishProfile=Win32
         cd bin/Release/netcoreapp3.1/publish/win32
-        find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Win32.zip" -@
+        find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Win86.zip" -@
     - name: Publish Linux 64
-      run: 
+      run: |
         dotnet publish -p:PublishProfile=Linux64
         cd bin/Release/netcoreapp3.1/publish/Linux64
         find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Win32.zip" -@
     - name: Publish Linux ARM
-      run: 
+      run: |
         dotnet publish -p:PublishProfile=LinuxARM
         cd bin/Release/netcoreapp3.1/publish/LinuxARM
         find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Win32.zip" -@
