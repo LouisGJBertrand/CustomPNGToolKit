@@ -26,51 +26,51 @@ jobs:
     - name: Publish Macos
       run: |
         dotnet publish -p:PublishProfile=MacOS
-        cd bin/Release/netcoreapp3.1/publish/MacOS
-        find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.MACOS.zip" -@
     - name: Publish Windows 64
       run:  |
         dotnet publish -p:PublishProfile=Win64
-        cd bin/Release/netcoreapp3.1/publish/win64
-        find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Win64.zip" -@
     - name: Publish Windows 32
       run: |
         dotnet publish -p:PublishProfile=Win32
-        cd bin/Release/netcoreapp3.1/publish/win32
-        find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Win86.zip" -@
     - name: Publish Linux 64
       run: |
         dotnet publish -p:PublishProfile=Linux64
-        cd bin/Release/netcoreapp3.1/publish/Linux64
-        find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.Linux64.zip" -@
     - name: Publish Linux ARM
       run: |
         dotnet publish -p:PublishProfile=LinuxARM
-        cd bin/Release/netcoreapp3.1/publish/LinuxARM
-        find . -name "CustomPNGToolKit*" -print| zip -r "CustomPNGToolKit.LinuxARM.zip" -@
     - name: Upload MACOS
       uses: actions/upload-artifact@v2
       with:
-        name: MACOS Artifact
-        path: bin/Release/netcoreapp3.1/publish/MacOS/CustomPNGToolKit.MACOS.zip
+        name: CustomPNGToolKit.MACOS
+        path: |
+          bin/Release/netcoreapp3.1/publish/MacOS/CustomPNGToolKit
+          bin/Release/netcoreapp3.1/publish/MacOS/CustomPNGToolKit.pdb
     - name: Upload WINDOWS64
       uses: actions/upload-artifact@v2
       with:
-        name: Windows 64 Artifact
-        path: bin/Release/netcoreapp3.1/publish/win64/CustomPNGToolKit.Win64.zip
+        name: CustomPNGToolKit.WIN64
+        path: |
+          bin/Release/netcoreapp3.1/publish/win64/CustomPNGToolKit.exe
+          bin/Release/netcoreapp3.1/publish/win64/CustomPNGToolKit.pdb
     - name: Upload WINDOWS86
       uses: actions/upload-artifact@v2
       with:
-        name: Windows 86 Artifact
-        path: bin/Release/netcoreapp3.1/publish/win32/CustomPNGToolKit.Win86.zip
+        name: CustomPNGToolKit.WIN86
+        path: |
+          bin/Release/netcoreapp3.1/publish/win32/CustomPNGToolKit.exe
+          bin/Release/netcoreapp3.1/publish/win32/CustomPNGToolKit.pdb
     - name: Upload Linux64
       uses: actions/upload-artifact@v2
       with:
-        name: Linux 64 Artifact
-        path: bin/Release/netcoreapp3.1/publish/Linux64/CustomPNGToolKit.Linux64.zip
+        name: CustomPNGToolKit.Linux64
+        path: |
+          bin/Release/netcoreapp3.1/publish/Linux64/CustomPNGToolKit
+          bin/Release/netcoreapp3.1/publish/Linux64/CustomPNGToolKit.pdb
     - name: Upload LinuxARM
       uses: actions/upload-artifact@v2
       with:
-        name: Linux ARM Artifact
-        path: bin/Release/netcoreapp3.1/publish/LinuxARM/CustomPNGToolKit.LinuxARM.zip
+        name: CustomPNGToolKit.LinuxARM
+        path: |
+          bin/Release/netcoreapp3.1/publish/LinuxARM/CustomPNGToolKit
+          bin/Release/netcoreapp3.1/publish/LinuxARM/CustomPNGToolKit.pdb
         
