@@ -38,7 +38,7 @@ namespace CustomPNGToolKit
             DisplayHelpToScreen();
         }
 
-        public static async void ParseResize(List<string> args)
+        public static void ParseResize(List<string> args)
         {
 
             if(args.Count < 5)
@@ -117,12 +117,12 @@ namespace CustomPNGToolKit
                                 actualImage = (Bitmap)Bitmap.FromFile(fileNames[ActualFileTreatingIndex]);
                             }
                             catch (Exception e)
-                            {/*
+                            {
                                 if(!(e.GetType() == typeof(OutOfMemoryException)))
                                 {
                                     DisplayInvalidRequest(e.Message);
                                     Environment.Exit(2);
-                                }*/
+                                }
                                 actualImage = null;
                                 ActualFileTreatingIndex++;
                                 FileToTreatLeft--;

@@ -26,7 +26,7 @@ namespace CustomPNGToolKit
                     @"E:\Data\Persos\3d Animations\Blender\Factorio\Conveyor Belt png Sequences\",
                     @"E:\Data\Persos\3d Animations\Blender\Factorio\Conveyor Belt png Sequences.Resized\",
                     "0.10",
-                    "4"};
+                    "74"};
             #endif
 
             if (args.Length <= 0)
