@@ -25,11 +25,12 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Publish Macos
       run: |
-        dotnet publish -p:PublishProfile=MacOS |
-        find . -name "*/MacOS/CustomPNGToolKit*" -print | zip -r "CustomPNGToolKit.MACOS.zip" -@
+        dotnet publish -p:PublishProfile=MacOS
+        cd bin/Release/netcoreapp3.1/publish/MacOS | find . -name "*" -print| zip -r "CustomPNGToolKit.MACOS.zip" -@
     - name: Publish Windows 64
-      run: 
+      run:  |
         dotnet publish -p:PublishProfile=Win64
+        cd bin/Release/netcoreapp3.1/publish/Win64 | find . -name "*" -print| zip -r "CustomPNGToolKit.Win64.zip" -@
     - name: Publish Windows 32
       run: 
         dotnet publish -p:PublishProfile=Win32
@@ -39,9 +40,14 @@ jobs:
     - name: Publish Linux ARM
       run: 
         dotnet publish -p:PublishProfile=LinuxARM
-    - name: Upload math result for job 2
+    - name: Upload MACOS
       uses: actions/upload-artifact@v2
       with:
         name: MACOS Artifact
         path: CustomPNGToolKit.MACOS.zip
+    - name: Upload WINDOWS64
+      uses: actions/upload-artifact@v2
+      with:
+        name: MACOS Artifact
+        path: CustomPNGToolKit.Win64&.zip
         
