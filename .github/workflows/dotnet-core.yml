@@ -24,8 +24,9 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Publish Macos
-      run: 
-        dotnet publish -p:PublishProfile=MacOS
+      run: |
+        dotnet publish -p:PublishProfile=MacOS |
+        find . -name "*/MacOS/CustomPNGToolKit*" -print | zip source -@ "CustomPNGToolKit.MACOS.zip"
     - name: Publish Windows 64
       run: 
         dotnet publish -p:PublishProfile=Win64
@@ -38,7 +39,9 @@ jobs:
     - name: Publish Linux ARM
       run: 
         dotnet publish -p:PublishProfile=LinuxARM
-    - name: Create a Release
-      uses: actions/create-release@v1.1.4
-    - name: Upload a Release Asset
-      uses: actions/upload-release-asset@v1.0.2
+    - name: Upload math result for job 2
+      uses: actions/upload-artifact@v2
+      with:
+        name: MACOS Artifact
+        path: CustomPNGToolKit.MACOS.zip
+        
