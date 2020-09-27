@@ -11,7 +11,7 @@ The software comes in a cli form and can be called from any terminal. Actually t
 simply copy the executable in a folder and open the terminal. Navigate through the folders and locate the folder where you copied CustomPNGToolKit within your terminal/cmd. Then
 type CustomPNGToolKit (or CustomPNGToolKit.exe on windows) and add your the arguments corresponding to your project. You can find a detailed list of available actions as following
 or by simply launching the executable:
-
+```
   (everything is case sensitive for the moment, i'll fix that later)
   - Resize <type> <input path> <output path> <resize ratio> [<thread count> <watermark activation>]
     the type is either a 'file' or a 'folder' (without ' symbole)
@@ -22,7 +22,8 @@ or by simply launching the executable:
     
     so an exemple: CustomPNGToolKit.exe Resize folder "input/" "output/" 0.1 4 false
     will resize every image file in the input folder by a ratio of 0.1 and will ouput result 4 image at a time in the output folder.
-    
+```
+
 # Licensing
 
 MIT classic license
