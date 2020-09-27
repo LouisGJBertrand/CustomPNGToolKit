@@ -22,6 +22,7 @@ or by simply launching the executable:
     
     so an exemple: CustomPNGToolKit.exe Resize folder "input/" "output/" 0.1 4 false
     will resize every image file in the input folder by a ratio of 0.1 and will ouput result 4 image at a time in the output folder.
+    NB: do not go to intense with the thread count, this my make the software crash.
 ```
 
 # Licensing

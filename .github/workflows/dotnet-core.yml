@@ -1,0 +1,76 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    - name: Publish Macos
+      run: |
+        dotnet publish -p:PublishProfile=MacOS
+    - name: Publish Windows 64
+      run:  |
+        dotnet publish -p:PublishProfile=Win64
+    - name: Publish Windows 32
+      run: |
+        dotnet publish -p:PublishProfile=Win32
+    - name: Publish Linux 64
+      run: |
+        dotnet publish -p:PublishProfile=Linux64
+    - name: Publish Linux ARM
+      run: |
+        dotnet publish -p:PublishProfile=LinuxARM
+    - name: Upload MACOS
+      uses: actions/upload-artifact@v2
+      with:
+        name: CustomPNGToolKit.MACOS
+        path: |
+          bin/Release/netcoreapp3.1/publish/MacOS/CustomPNGToolKit
+          bin/Release/netcoreapp3.1/publish/MacOS/CustomPNGToolKit.pdb
+    - name: Upload WINDOWS64
+      uses: actions/upload-artifact@v2
+      with:
+        name: CustomPNGToolKit.WIN64
+        path: |
+          bin/Release/netcoreapp3.1/publish/win64/CustomPNGToolKit.exe
+          bin/Release/netcoreapp3.1/publish/win64/CustomPNGToolKit.pdb
+    - name: Upload WINDOWS86
+      uses: actions/upload-artifact@v2
+      with:
+        name: CustomPNGToolKit.WIN86
+        path: |
+          bin/Release/netcoreapp3.1/publish/win32/CustomPNGToolKit.exe
+          bin/Release/netcoreapp3.1/publish/win32/CustomPNGToolKit.pdb
+    - name: Upload Linux64
+      uses: actions/upload-artifact@v2
+      with:
+        name: CustomPNGToolKit.Linux64
+        path: |
+          bin/Release/netcoreapp3.1/publish/Linux64/CustomPNGToolKit
+          bin/Release/netcoreapp3.1/publish/Linux64/CustomPNGToolKit.pdb
+    - name: Upload LinuxARM
+      uses: actions/upload-artifact@v2
+      with:
+        name: CustomPNGToolKit.LinuxARM
+        path: |
+          bin/Release/netcoreapp3.1/publish/LinuxARM/CustomPNGToolKit
+          bin/Release/netcoreapp3.1/publish/LinuxARM/CustomPNGToolKit.pdb
+        
