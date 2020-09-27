@@ -26,7 +26,7 @@ jobs:
     - name: Publish Macos
       run: |
         dotnet publish -p:PublishProfile=MacOS |
-        find . -name "*/MacOS/CustomPNGToolKit*" -print | zip source -@ "CustomPNGToolKit.MACOS.zip"
+        find . -name "*/MacOS/CustomPNGToolKit*" -print | zip -r "CustomPNGToolKit.MACOS.zip" -@
     - name: Publish Windows 64
       run: 
         dotnet publish -p:PublishProfile=Win64
