@@ -23,3 +23,12 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Publish
+      run: 
+        dotnet publish -p:PublishProfile=MacOS
+        dotnet publish -p:PublishProfile=Win64
+        dotnet publish -p:PublishProfile=Win32
+        dotnet publish -p:PublishProfile=Linux64
+        dotnet publish -p:PublishProfile=LinuxARM
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.5
