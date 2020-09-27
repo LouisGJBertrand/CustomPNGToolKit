@@ -94,17 +94,22 @@ namespace CustomPNGToolKit
                 while (Working)
                 {
 
-                    Task[] treatmentTasks = new Task[int.Parse(args[5])];
+                    Thread[] treatmentTasks = new Thread[int.Parse(args[5])];
 
                     for(int t = 0; t < int.Parse(args[5]); t++)
                     {
 
                         Bitmap actualImage = null;
+                        if (fileNames.Length <= ActualFileTreatingIndex)
+                        {
+                            break;
+                        }
 
-                        while(actualImage == null)
+                        while (actualImage == null)
                         {
                             if (fileNames.Length <= ActualFileTreatingIndex)
                             {
+                                actualImage = null;
                                 break;
                             }
                             try
@@ -125,21 +130,29 @@ namespace CustomPNGToolKit
                         }
                         if(actualImage != null)
                         {
-                            treatmentTasks[t] = ResizeFile(actualImage, args[3] + Path.GetFileName(fileNames[ActualFileTreatingIndex]), resizeFactor);
+                            ThreadStart rf = delegate () {
+                                ResizeFile(actualImage, args[3] + Path.GetFileName(fileNames[ActualFileTreatingIndex]), resizeFactor);
+                            };
+                            treatmentTasks[t] = new Thread(rf); // 
+                            treatmentTasks[t].Name = "Thread" + (t+1);
+                            treatmentTasks[t].Start();
+                            Thread.Sleep(10); // Sleep to avoid the ActualFileTreatingIndex going out of sync
                             ActualFileTreatingIndex++;
                         }
 
                     }
 
-                    foreach(Task task in treatmentTasks)
+                    foreach(Thread thread in treatmentTasks)
                     {
-                        if(task == null)
+                        if(thread == null)
                         {
                             continue;
                         }
-                        await task;
+                        thread.Join();
                         FileToTreatLeft--;
                     }
+
+                    Thread.Sleep(200); // Sleep to avoid GDI to overheat
 
 
                     if (FileToTreatLeft == 0)
@@ -161,7 +174,7 @@ namespace CustomPNGToolKit
                 CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
                 ci.NumberFormat.CurrencyDecimalSeparator = ".";
                 float resizeFactor = float.Parse(args[4],NumberStyles.Any, ci);
-                await ResizeFile((Bitmap)Bitmap.FromFile(args[2]), args[3], resizeFactor);
+                ResizeFile((Bitmap)Bitmap.FromFile(args[2]), args[3], resizeFactor);
                 
                 /*}
                 catch (Exception e)
@@ -176,7 +189,7 @@ namespace CustomPNGToolKit
 
         }
 
-        public static async Task ResizeFile(Bitmap inputFile, string outputFilePath, float resizeFactor)
+        public static void ResizeFile(Bitmap inputFile, string outputFilePath, float resizeFactor)
         {
 
             var destRect = new Rectangle(0, 0, (int)(inputFile.Width * resizeFactor), (int)(inputFile.Height * resizeFactor));
@@ -199,7 +212,7 @@ namespace CustomPNGToolKit
             }
 
             destImage.Save(outputFilePath);
-            Console.WriteLine("Resized an image by {0} factor and saved it at {1}", resizeFactor, outputFilePath);
+            Console.WriteLine(Thread.CurrentThread.Name+": Resized an image by {0} factor and saved it at {1}", resizeFactor, outputFilePath);
         }
     }
 }
