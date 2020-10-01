@@ -1,4 +1,4 @@
-![.NET Core](https://github.com/PYLOTT/CustomPNGToolKit/workflows/.NET%20Core/badge.svg)
+[![.NET Core](https://github.com/PYLOTT/CustomPNGToolKit/workflows/.NET%20Core/badge.svg)](https://github.com/PYLOTT/CustomPNGToolKit/actions)
 
 # CustomPNGToolKit
 a custom image toolkit that i made because i needed one; in this version it can only resize image files (individual file) and image sequence (directory)
