@@ -72,7 +72,9 @@ namespace CustomPNGToolKit
                     {
 
                         Console.WriteLine("Missing argument after -i. please provide a file/folder path");
-                        return;
+                        if (Constants.AbortOnFail)
+                            Program.Exit(-1);
+                        continue;
 
                     }
                     string filePath = args[parsingIndex + 1];
@@ -154,7 +156,7 @@ namespace CustomPNGToolKit
 
             foreach(SubRoutineExecutor subRoutineExecutor in subRoutineExecutors)
             {
-                Input = subRoutineExecutor.Execute(Input);
+                Input = subRoutineExecutor.Execute(Input);g
             }
 
         }
