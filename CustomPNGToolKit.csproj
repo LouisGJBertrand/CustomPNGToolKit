@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <Authors>Louis Bertrand &lt;l.bertrand@student.isartdigital.com&gt;</Authors>
     <Company>Louis Bertrand</Company>
     <Description>a custom image toolkit that i made because i needed one; in this version it can only resize image files (individual file) and image sequence (directory)</Description>
     <Copyright>(c) 2020 Louis BERTRAND All Rights Reserved</Copyright>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
