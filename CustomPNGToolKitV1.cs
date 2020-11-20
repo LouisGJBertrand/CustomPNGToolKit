@@ -54,7 +54,14 @@ namespace CustomPNGToolKit
 
                         if (args[parsingIndex + 1] == "true" || args[parsingIndex + 1] == "false")
                         {
-                            Acknoledgement = Boolean.Parse(args[parsingIndex + 1]);
+                            try
+                            {
+                                Acknoledgement = Boolean.Parse(args[parsingIndex + 1]);
+                            } catch (Exception e)
+                            {
+                                // DONOTHING
+                                continue;
+                            }
                             parsingIndex++;
                             continue;
                         }
@@ -156,7 +163,7 @@ namespace CustomPNGToolKit
 
             foreach(SubRoutineExecutor subRoutineExecutor in subRoutineExecutors)
             {
-                Input = subRoutineExecutor.Execute(Input);g
+                Input = subRoutineExecutor.Execute(Input);
             }
 
         }
